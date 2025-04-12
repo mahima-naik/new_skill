@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Web Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      border: 4px solid #444;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    h1, h2, h3 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .start-btn { background-color: #007bff; color: white; }
+    .start-btn:hover { background-color: #0056b3; }
+
+    .difficulty-btn { background-color: #28a745; color: white; }
+    .difficulty-btn:hover { background-color: #1e7e34; }
+
+    .option-btn { background-color: #f0f0f0; color: #333; border: 2px solid #ccc; }
+    .option-btn:hover { background-color: #ddd; }
+
+    .correct { background-color: #28a745 !important; color: white; }
+    .wrong { background-color: #dc3545 !important; color: white; }
+
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="start-screen">
+      <h1>Welcome to the Quiz!</h1>
+      <button class="start-btn" onclick="showDifficulty()">Start Quiz</button>
+    </div>
+
+    <div id="difficulty-screen" class="hidden">
+      <h2>Select Difficulty</h2>
+      <button class="difficulty-btn" onclick="startQuiz('hard')">Hard</button>
+      <button class="difficulty-btn" onclick="startQuiz('medium')">Medium</button>
+    </div>
+
+    <div id="quiz-screen" class="hidden">
+      <h2 id="question-text"></h2>
+      <div id="options"></div>
+    </div>
+  </div>
+
+  <script>
+    const hardQuestions = [
+      { question: 'What is the time complexity of binary search?', options: ['O(n)', 'O(log n)', 'O(n log n)', 'O(1)'], answer: 1 },
+      { question: 'What does SQL stand for?', options: ['Structured Query Language', 'Simple Query List', 'Structured Question Language', 'System Query Logic'], answer: 0 },
+      // Add 8 more hard questions here
+    ];
+
+    const mediumQuestions = [
+      { question: 'Which tag is used to define a hyperlink in HTML?', options: ['<link>', '<a>', '<href>', '<url>'], answer: 1 },
+      { question: 'What is 5 * 6?', options: ['30', '11', '56', '20'], answer: 0 },
+      {question: 'Which tag is used to define a hyperlink in HTML?', options: ['<link>', '<a>', '<href>', '<url>'], answer: 1 },
+      {question: 'Which tag is used to define a hyperlink in HTML?', options: ['<link>', '<a>', '<href>', '<url>'], answer: 1 },
+      {question: 'Which tag is used to define a hyperlink in HTML?', options: ['<link>', '<a>', '<href>', '<url>'], answer: 1 },
+      { question: 'What is 5 * 6?', options: ['30', '11', '56', '20'], answer: 0 },
+      { question: 'What is 5 * 6?', options: ['30', '11', '56', '20'], answer: 0 },
+      { question: 'What is 5 * 6?', options: ['30', '11', '56', '20'], answer: 0 },
+      { question: 'What is 5 * 6?', options: ['30', '11', '56', '20'], answer: 0 },
+      { question: 'What is 5 * 6?', options: ['30', '11', '56', '20'], answer: 0 },
+      // Add 8 more medium questions here
+    ];
+
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+
+    function showDifficulty() {
+      document.getElementById('start-screen').classList.add('hidden');
+      document.getElementById('difficulty-screen').classList.remove('hidden');
+    }
+
+    function startQuiz(difficulty) {
+      currentQuestions = difficulty === 'hard' ? hardQuestions : mediumQuestions;
+      currentIndex = 0;
+      score = 0;
+      document.getElementById('difficulty-screen').classList.add('hidden');
+      document.getElementById('quiz-screen').classList.remove('hidden');
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = currentQuestions[currentIndex];
+      document.getElementById('question-text').textContent = `Q${currentIndex + 1}. ${q.question}`;
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt;
+        btn.onclick = () => handleAnswer(idx);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(selected) {
+      const correct = currentQuestions[currentIndex].answer;
+      const buttons = document.querySelectorAll('.option-btn');
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correct) btn.classList.add('correct');
+        if (idx === selected && idx !== correct) btn.classList.add('wrong');
+      });
+      if (selected === correct) score++;
+      setTimeout(() => {
+        currentIndex++;
+        if (currentIndex < currentQuestions.length) {
+          showQuestion();
+        } else {
+          showResult();
+        }
+      }, 1000);
+    }
+
+    function showResult() {
+      document.getElementById('quiz-screen').classList.add('hidden');
+      document.getElementById('result-screen').classList.remove('hidden');
+      document.getElementById('score').textContent = score;
+      const message = score >= 8 ? 'High' : score >= 5 ? 'Average' : 'Low';
+      document.getElementById('result-message').textContent = `Performance: ${message}`;
+    }
+
+    function showResult() {
+      document.getElementById('quiz-screen').classList.add('hidden');
+      document.getElementById('result-screen').classList.remove('hidden');
+      document.getElementById('score').textContent = score;
+    
+      if (score >= 8) {
+        performanceLevel = 'high';
+        document.getElementById('result-message').textContent = 'Performance: High';
+      } else if (score >= 5) {
+        performanceLevel = 'average';
+        document.getElementById('result-message').textContent = 'Performance: Average';
+      } else {
+        performanceLevel = 'low';
+        document.getElementById('result-message').textContent = 'Performance: Low';
+      }
+    
+      document.getElementById('next-level-btn').classList.remove('hidden');
+    }
+  
+  </script>
+    
+</body>
+</html>

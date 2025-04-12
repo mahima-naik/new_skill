@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Analyst Resources</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://images.unsplash.com/photo-1556761175-129418cb2dfe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      margin: 50px auto;
+      padding: 40px;
+      max-width: 900px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .pdf-list {
+      margin-top: 20px;
+    }
+
+    .pdf-item {
+      background-color: #ffffff;
+      border-left: 8px solid #007bff;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s ease;
+    }
+
+    .pdf-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .pdf-item span {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .pdf-item button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .pdf-item button:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      .pdf-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .pdf-item button {
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Data Analyst Resources</h1>
+
+    <div class="pdf-list">
+      <div class="pdf-item">
+        <span>1. Data Analysis with Python</span>
+        <button onclick="openPDF('https://www.pearsonhighered.com/assets/samplechapter/0/3/2/1/0321537114.pdf')">Preview & Download</button>
+      </div>
+      <div class="pdf-item">
+        <span>2. Excel for Data Analysts</span>
+        <button onclick="openPDF('https://ncert.nic.in/textbook/pdf/kecs1ps.pdf')">Preview & Download</button>
+      </div>
+      <div class="pdf-item">
+        <span>3. SQL Essentials Guide</span>
+        <button onclick="openPDF('ED536788.pdf')">Preview & Download</button>
+      </div>
+      <div class="pdf-item">
+        <span>4. Data Visualization Basics</span>
+        <button onclick="openPDF('PythonBasicDataAnalysis20180412.pdf')">Preview & Download</button>
+      </div>
+      <div class="pdf-item">
+        <span>5. Tableau Fundamentals</span>
+        <button onclick="openPDF('Tableau_Basics.pdf')">Preview & Download</button>
+      </div>
+      <div class="pdf-item">
+        <span>6. R Programming for Data Analysis</span>
+        <button onclick="openPDF('R_for_Data_Analysis.pdf')">Preview & Download</button>
+      </div>
+      <div class="pdf-item">
+        <span>7. Machine Learning for Data Analysts</span>
+        <button onclick="openPDF('ML_for_Data_Analysts.pdf')">Preview & Download</button>
+      </div>
+      <div class="pdf-item">
+        <span>8. Power BI Dashboarding Guide</span>
+        <button onclick="openPDF('PowerBI_Guide.pdf')">Preview & Download</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openPDF(pdfPath) {
+      const url = pdfPath + "#page=1";
+      window.open(url, '_blank');
+    }
+  </script>
+
+</body>
+</html>

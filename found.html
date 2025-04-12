@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation Level</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3em; /* Make the heading larger */
+            margin-bottom: 20px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 10cm); /* Two boxes per row */
+            gap: 20px; /* Space between boxes */
+            justify-content: center;
+        }
+        .box {
+            width: 10cm; /* Set box width to 10 cm */
+            height: 10cm; /* Set box height to 10 cm */
+            background-color: rgba(135, 206, 250, 0.5); /* Transparent sky blue */
+            border: 1px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.3s; /* Smooth transition for expansion */
+        }
+        .box:hover {
+            transform: scale(1.1); /* Expand the box on hover */
+        }
+        /* Center the box when there's only one in the row */
+        .container > .box:nth-child(odd):nth-last-child(1) {
+            grid-column: 1 / -1; /* Span across all columns */
+            justify-self: center; /* Center the box */
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">JOB PREPARATION   </h1>
+  <div class="container">
+    <div class="box" onclick="location.href='re.html'">RESUME & LINKEDIN OPTIMIZATION   </div>
+    <div class="box" onclick="location.href='mo.html'">MOCK INTERVIEWS </div>
+    <div class="box" onclick="location.href='le.html'"> LEARN TO READ JOB DESCRIPTIONS</div>
+    <div class="box" onclick="location.href='f2.html'">APPLY + NETWORK ON LINKEDIN  </div>
+
+
+  </div>
+
+</body>
+</html>
+

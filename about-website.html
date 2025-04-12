@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Website</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8d6f3;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 10px 20px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin-right: 15px;
+    }
+
+    .navbar button {
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    .main-content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .image-gallery {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 10px 20px;
+    }
+
+    .image-gallery img {
+      width: 500px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(231, 121, 229, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .image-gallery img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+      <a href="about-website.html">About Website</a>
+      <a href="about-us.html">About Us</a>
+    </div>
+    <div class="nav-right">
+      <button onclick="login()">Login</button>
+    </div>
+  </nav>
+
+  <div class="content-wrapper">
+    <header class="main-content">
+      <h1>About This Website</h1>
+      <p>This platform allows users to create and take quizzes on various subjects. It's designed to be intuitive and engaging for all age groups.</p>
+      <a href="offline.html" target="_blank" style="text-decoration: none; color: rgb(185, 6, 6);">
+        Click here for offline resources
+      </a>
+      
+    </header>
+
+    <div class="image-gallery">
+      <img src="sc1.png" alt="Slide 1">
+      <img src="sc2.png" alt="Slide 2">
+      <img src="sc3.png" alt="Slide 3">
+      <img src="sc4.png" alt="Slide 3">
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

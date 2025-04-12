@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register & Login with Extra Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .message {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+
+    hr {
+      margin: 30px 0;
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    a input[type="button"] {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+}
+
+a input[type="button"]:hover {
+  background-color: #0b7dda;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div id="register-section">
+    <h2>User Register</h2>
+    <form id="registrationForm">
+      <label for="reg-username">Username</label>
+      <input type="text" id="reg-username" required>
+
+      <label for="reg-password">Password</label>
+      <input type="password" id="reg-password" required>
+
+      <label for="reg-confirm-password">Confirm Password</label>
+      <input type="password" id="reg-confirm-password" required>
+
+      <input type="submit" value="Register">
+      <div id="register-msg" class="message"></div>
+    </form>
+  </div>
+
+  <hr>
+
+  <div id="login-section">
+    <h2>User Login</h2>
+    <form id="loginForm">
+      <label for="login-username">Username</label>
+      <input type="text" id="login-username" required>
+
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" required>
+
+      <input type="submit" value="Login">
+      <div id="login-msg" class="message"></div>
+    </form>
+  </div>
+
+  <div id="profile-section" class="hidden">
+    <h2>Registration Form</h2>
+    <form id="profileForm">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" required>
+
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" required>
+
+      <label for="education">Education</label>
+      <select id="education" required>
+        <option value="">Select Education</option>
+        <option value="High School">High School</option>
+        <option value="Undergraduate">Undergraduate</option>
+        <option value="Postgraduate">Postgraduate</option>
+      </select>
+
+      <label for="stream">Stream</label>
+      <input type="text" id="stream" required>
+
+      <label for="skills">Skills</label>
+      <textarea id="skills" rows="3" required></textarea>
+
+      <label for="resume">Upload Resume (PDF only)</label>
+      <input type="file" id="resume" accept="application/pdf" required>
+
+      <input type="submit" value="Submit">
+      <div id="profile-msg" class="message"></div>
+      <a href="lev - Final/index1.html" id="nextButton" class="hidden">
+        <input type="button" value="Next →">
+      </a>
+      
+    </form>
+  </div>
+</div>
+
+<script>
+  let registeredUser = {};
+
+  // Register
+  document.getElementById('registrationForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const username = document.getElementById('reg-username').value.trim();
+    const password = document.getElementById('reg-password').value;
+    const confirmPassword = document.getElementById('reg-confirm-password').value;
+    const msg = document.getElementById('register-msg');
+
+    if (password !== confirmPassword) {
+      msg.textContent = "❌ Passwords do not match!";
+      msg.style.color = "red";
+      return;
+    }
+
+    registeredUser = { username, password };
+    msg.textContent = "✅ Registered successfully!";
+    msg.style.color = "green";
+    this.reset();
+  });
+
+  // Login
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value;
+    const msg = document.getElementById('login-msg');
+
+    if (username === registeredUser.username && password === registeredUser.password) {
+      msg.textContent = "✅ Login successful!";
+      msg.style.color = "green";
+
+      // Show profile form
+      document.getElementById('login-section').classList.add('hidden');
+      document.getElementById('register-section').classList.add('hidden');
+      document.getElementById('profile-section').classList.remove('hidden');
+    } else {
+      msg.textContent = "❌ Invalid credentials.";
+      msg.style.color = "red";
+    }
+
+    this.reset();
+  });
+
+  // Final Profile Submission
+  document.getElementById('profileForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const resume = document.getElementById('resume').files[0];
+
+    if (!resume || resume.type !== "application/pdf") {
+      alert("❌ Please upload a valid PDF resume.");
+      return;
+    }
+
+    document.getElementById('profile-msg').textContent = "✅ Profile submitted successfully!";
+    document.getElementById('profile-msg').style.color = "green";
+    document.getElementById('nextButton').classList.remove('hidden');
+
+  
+
+    this.reset();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Path</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: black;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-top: 1rem;
+      color: #00d9ff;
+      text-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 2rem 0;
+    }
+
+    .circle {
+      width: 15rem;
+      height: 15rem;
+      border-radius: 50%;
+      background-color: rgba(9, 173, 238, 0.2);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+      margin: 1rem;
+      text-decoration: none;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .circle:hover {
+      transform: scale(1.05);
+      background-color: rgba(18, 152, 205, 0.3);
+    }
+
+    .left {
+      align-self: flex-start;
+      margin-left: 8rem;
+    }
+
+    .right {
+      align-self: flex-end;
+      margin-right: 8rem;
+    }
+
+    /* Floating Image Styles */
+    .floating-img-link {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: block;
+    }
+
+    .floating-img {
+      width: 100px;
+      height: auto;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .floating-img:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Heading -->
+  <h1> Data Analyst Roadmap</h1>
+
+  <div class="container">
+    <a href="level 1/found.html" class="circle left">1. Foundation Level</a>
+    <a href="level 2/found.html" class="circle right">2. Programming Basics</a>
+    <a href="level 3/found.html" class="circle left">3. Data Visualization</a>
+    <a href="level 4/found.html" class="circle right">4. Databases & SQL</a>
+    <a href="level 5/found.html" class="circle left">5. Projects & Case Studies</a>
+    <a href="level 6/found.html" class="circle right">6. Advanced Topics</a>
+    <a href="level 7/found.html" class="circle left">7. Job Preparation</a>
+    <a href="level 7/quiz.html" class="circle right">8. Quiz</a>
+
+  </div>
+
+  <!-- Floating Image -->
+  <a href="ai-helper.html" class="floating-img-link" id="floatingBot">
+    <img src="4712009.png" alt="AI Bot" class="floating-img" />
+  </a>
+
+  <script>
+    // Scroll-following effect for floating icon
+    const floatingBot = document.getElementById('floatingBot');
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const direction = scrollTop > lastScrollTop ? 1 : -1;
+      floatingBot.style.transform = `translateY(${direction * 10}px)`;
+      setTimeout(() => {
+        floatingBot.style.transform = `translateY(0px)`;
+      }, 150); // snap back after slight move
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+  </script>
+</body>
+</html>
